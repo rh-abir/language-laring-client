@@ -1,13 +1,53 @@
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../provider/AuthPorvider";
 
 const SignUp = () => {
+  const {user, signUp } = useContext(AuthContext);
+
+  const [error, setError] = useState("");
+
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (data) => {
+    setError('')
+    const email = data.email;
+    const pass = data.password;
+    const confirmPass = data.ConfirmPassword;
+
+    if(pass !== confirmPass){
+        return setError("Dose not mathc password")
+    }
+
+    if(!/(?=.*?[A-Z])/.test(pass)){
+        return setError("Don't have a capital letter")
+    }
+
+    if(!/(?=.*?[#?!@$%^&*-])/.test(pass)){
+        return setError("Don't have a special character")
+    }
+
+
+
+    signUp(email, pass)
+    .then(singUp => {
+        const singUpUser = singUp.user
+        console.log(singUpUser)
+    })
+    .catch(err => {
+        console.log(err.message)
+        if(err){
+            setError("Password less than 6 characters")
+        }
+    })
+
+  };
+
+
+//   console.log(user)
 
   return (
     <div className="hero min-h-screen bg-base-200">
@@ -60,8 +100,8 @@ const SignUp = () => {
                 <span className="label-text">Confirm Password *</span>
               </label>
               <input
-                type="text"
-                {...register("name", { required: true })}
+                type="password"
+                {...register("ConfirmPassword", { required: true })}
                 placeholder="type your Confirm Password"
                 className="input input-bordered"
               />
@@ -73,11 +113,14 @@ const SignUp = () => {
               </label>
               <input
                 type="file"
-                placeholder="password"
-                {...register("password")}
+                placeholder="Photo URl"
+                {...register("PhotoURL")}
                 className="input input-bordered"
               />
             </div>
+
+            <p className="text-center text-orange-600 font-semibold">{error}</p>
+
             <div className="form-control mt-6">
               <input className="btn btn-primary" type="submit" value="Log In" />
             </div>

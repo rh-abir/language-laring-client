@@ -11,7 +11,7 @@ const SignIn = () => {
   } = useForm();
   const onSubmit = (data) => console.log(data);
 
-  console.log(user);
+  // console.log(user);
 
   return (
     <div className="hero min-h-screen bg-base-200">
