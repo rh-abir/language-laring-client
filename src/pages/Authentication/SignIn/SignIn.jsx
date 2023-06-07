@@ -1,12 +1,17 @@
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
+import { AuthContext } from "../../../provider/AuthPorvider";
 
 const SignIn = () => {
+  const { user } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => console.log(data);
+
+  console.log(user);
 
   return (
     <div className="hero min-h-screen bg-base-200">
