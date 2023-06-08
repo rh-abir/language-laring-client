@@ -12,7 +12,7 @@ const AuthPorvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loading, setLoding] = useState(false)
 
-    const signUp = (email, password) => {
+    const createUser = (email, password) => {
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
@@ -49,7 +49,7 @@ const AuthPorvider = ({ children }) => {
 
   const authInfo = {
     user,
-    signUp,
+    createUser ,
     signIn,
     googleSignIn,
     updateUSerProfile,

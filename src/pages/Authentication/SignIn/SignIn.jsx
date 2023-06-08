@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../provider/AuthPorvider";
+import { Link } from "react-router-dom";
 
 const SignIn = () => {
   const { user } = useContext(AuthContext);
@@ -47,16 +48,20 @@ const SignIn = () => {
                 {...register("password")}
                 className="input input-bordered"
               />
-              <label className="label">
-                <a href="#" className="label-text-alt link link-hover">
-                  Forgot password?
-                </a>
-              </label>
             </div>
             <div className="form-control mt-6">
               <button className="btn btn-primary">Login</button>
             </div>
           </form>
+          <div className="divider">OR</div>
+          <label className="label text-center">
+            <p className="text-centers mx-auto">
+              New Here ?
+              <Link className="label-text-alt link link-hover" to="/signup">
+                Sign up
+              </Link>
+            </p>
+          </label>
         </div>
       </div>
     </div>

@@ -4,50 +4,65 @@ import { Link } from "react-router-dom";
 import { AuthContext } from "../../../provider/AuthPorvider";
 
 const SignUp = () => {
-  const {user, signUp } = useContext(AuthContext);
+  const { user, createUser, updateUSerProfile } = useContext(AuthContext);
 
   const [error, setError] = useState("");
 
-  const {
-    register,
-    handleSubmit,
-  } = useForm();
+  const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    setError('')
+    setError("");
+
     const email = data.email;
     const pass = data.password;
+    const name = data.name;
     const confirmPass = data.ConfirmPassword;
 
-    if(pass !== confirmPass){
-        return setError("Dose not mathc password")
+    if (pass !== confirmPass) {
+      return setError("Dose not mathc password");
     }
 
-    if(!/(?=.*?[A-Z])/.test(pass)){
-        return setError("Don't have a capital letter")
+    if (!/(?=.*?[A-Z])/.test(pass)) {
+      return setError("Don't have a capital letter");
     }
 
-    if(!/(?=.*?[#?!@$%^&*-])/.test(pass)){
-        return setError("Don't have a special character")
+    if (!/(?=.*?[#?!@$%^&*-])/.test(pass)) {
+      return setError("Don't have a special character");
     }
 
+    // uploade image
+    const image = data.image[0];
 
+    console.log(image);
 
-    signUp(email, pass)
-    .then(singUp => {
-        const singUpUser = singUp.user
-        console.log(singUpUser)
+    const formData = new FormData();
+    formData.append("image", image);
+
+    const url = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_IMGBB_KEY
+    }`;
+
+    fetch(url, {
+      method: "POST",
+      body: formData,
     })
-    .catch(err => {
-        console.log(err.message)
-        if(err){
-            setError("Password less than 6 characters")
-        }
-    })
+      .then((res) => res.json())
+      .then((imageData) => {
+        const imageUrl = imageData.data.display_url;
 
+        createUser(email, pass)
+          .then((result) => {
+            console.log(result.user);
+            updateUSerProfile(name, imageUrl)
+            .then(() => {})
+            .catch(err => {
+              console.log(err.message)
+            })
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
+      });
   };
-
-
-//   console.log(user)
 
   return (
     <div className="hero min-h-screen bg-base-200">
@@ -113,8 +128,9 @@ const SignUp = () => {
               </label>
               <input
                 type="file"
-                placeholder="Photo URl"
-                {...register("PhotoURL")}
+                accept="image/*"
+                placeholder="image"
+                {...register("image")}
                 className="input input-bordered"
               />
             </div>
@@ -129,7 +145,7 @@ const SignUp = () => {
           <div className="divider">OR</div>
 
           <label className="label">
-            <p>
+            <p className="text-centers mx-auto">
               Already a User?
               <Link className="label-text-alt link link-hover" to="/signin">
                 LOGIN
