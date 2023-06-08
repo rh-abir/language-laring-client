@@ -3,9 +3,11 @@ import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../provider/AuthPorvider";
 import { toast } from "react-toastify";
+import { FaFacebookF, FaGoogle } from "react-icons/fa";
+import { FiGithub } from "react-icons/fi";
 
 const SignUp = () => {
-  const { user, createUser, updateUSerProfile } = useContext(AuthContext);
+  const { createUser, updateUSerProfile , googleSignIn, gitHubSignIn} = useContext(AuthContext);
 
   const [error, setError] = useState("");
 
@@ -54,12 +56,12 @@ const SignUp = () => {
           .then((result) => {
             console.log(result.user);
             updateUSerProfile(name, imageUrl)
-            .then(() => {
-              toast.success('Done !')
-            })
-            .catch(err => {
-              console.log(err.message)
-            })
+              .then(() => {
+                toast.success("Done !");
+              })
+              .catch((err) => {
+                console.log(err.message);
+              });
           })
           .catch((err) => {
             console.log(err.message);
@@ -67,10 +69,37 @@ const SignUp = () => {
       });
   };
 
+  const hangleGoogleSingIn = () => {
+    googleSignIn()
+      .then((result) => {
+        const loggedUsaer = result.user;
+        console.log(loggedUsaer);
+        toast.success("LogIn successfully");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  // githubsingin
+
+  const hangleGitHubSingIn = () => {
+    gitHubSignIn()
+      .then((result) => {
+        const loggedUsaer = result.user;
+        console.log(loggedUsaer);
+        toast.success("LogIn successfully");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  // console
+
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row">
-        
         <div className="text-center lg:text-left lg:w-1/2">
           <h1 className="text-5xl font-bold">Login now!</h1>
           <p className="py-6">
@@ -82,7 +111,6 @@ const SignUp = () => {
 
         <div className="card flex-shrink-0 lg:w-1/2 max-w-sm shadow-2xl bg-base-100">
           <form onSubmit={handleSubmit(onSubmit)} className="card-body">
-
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name *</span>
@@ -149,7 +177,25 @@ const SignUp = () => {
           </form>
 
           <div className="divider">OR</div>
+          <div className="flex justify-center items-center gap-5">
+            <button
+              onClick={hangleGoogleSingIn}
+              className="btn btn-circle btn-outline text-red-400"
+            >
+              <FaGoogle size="20"></FaGoogle>
+            </button>
+            {/* TODO */}
+            <button className="btn btn-circle btn-outline text-red-400">
+              <FaFacebookF size="20"></FaFacebookF>
+            </button>
 
+            <button
+              onClick={hangleGitHubSingIn}
+              className="btn btn-circle btn-outline text-red-400"
+            >
+              <FiGithub size="20"></FiGithub>
+            </button>
+          </div>
           <label className="label">
             <p className="text-centers mx-auto">
               Already a User?

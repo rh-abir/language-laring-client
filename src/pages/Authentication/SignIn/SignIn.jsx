@@ -4,8 +4,11 @@ import { AuthContext } from "../../../provider/AuthPorvider";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
+import { FaFacebookF, FaGoogle } from "react-icons/fa";
+import { FiGithub } from "react-icons/fi";
+
 const SignIn = () => {
-  const { user, signIn } = useContext(AuthContext);
+  const { signIn, googleSignIn, gitHubSignIn } = useContext(AuthContext);
 
   const [error, setError] = useState("");
 
@@ -23,12 +26,37 @@ const SignIn = () => {
       })
       .catch((err) => {
         console.log(err.message);
-        if(err.message === 'Firebase: Error (auth/wrong-password).'){
-          setError('Worng Password Tray Agen');
-        }
-        else{
+        if (err.message === "Firebase: Error (auth/wrong-password).") {
+          setError("Worng Password Tray Agen");
+        } else {
           setError("Email Doesn't Match Tray Agen");
         }
+      });
+  };
+
+  const hangleGoogleSingIn = () => {
+    googleSignIn()
+      .then((result) => {
+        const loggedUsaer = result.user;
+        console.log(loggedUsaer);
+        toast.success("LogIn successfully");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  // githubsingin
+
+  const hangleGitHubSingIn = () => {
+    gitHubSignIn()
+      .then((result) => {
+        const loggedUsaer = result.user;
+        console.log(loggedUsaer);
+        toast.success("LogIn successfully");
+      })
+      .catch((err) => {
+        console.log(err.message);
       });
   };
 
@@ -77,6 +105,26 @@ const SignIn = () => {
             </div>
           </form>
           <div className="divider">OR</div>
+          {/* sosical login */}
+          <div className="flex justify-center items-center gap-5">
+            <button
+              onClick={hangleGoogleSingIn}
+              className="btn btn-circle btn-outline text-red-400"
+            >
+              <FaGoogle size="20"></FaGoogle>
+            </button>
+            {/* TODO */}
+            <button className="btn btn-circle btn-outline text-red-400">
+              <FaFacebookF size="20"></FaFacebookF>
+            </button>
+
+            <button
+              onClick={hangleGitHubSingIn}
+              className="btn btn-circle btn-outline text-red-400"
+            >
+              <FiGithub size="20"></FiGithub>
+            </button>
+          </div>
           <label className="label text-center">
             <p className="text-centers mx-auto">
               New Here ?
