@@ -1,16 +1,36 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../provider/AuthPorvider";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const SignIn = () => {
-  const { user } = useContext(AuthContext);
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const { user, signIn } = useContext(AuthContext);
+
+  const [error, setError] = useState("");
+
+  const { register, handleSubmit } = useForm();
+  const onSubmit = (data) => {
+    const email = data.email;
+    const pass = data.password;
+
+    console.log(email, pass);
+
+    signIn(email, pass)
+      .then((result) => {
+        console.log(result.user);
+        toast.success("LogIn successfully");
+      })
+      .catch((err) => {
+        console.log(err.message);
+        if(err.message === 'Firebase: Error (auth/wrong-password).'){
+          setError('Worng Password Tray Agen');
+        }
+        else{
+          setError("Email Doesn't Match Tray Agen");
+        }
+      });
+  };
 
   // console.log(user);
 
@@ -49,6 +69,9 @@ const SignIn = () => {
                 className="input input-bordered"
               />
             </div>
+
+            <p className="text-center text-orange-600 font-semibold">{error}</p>
+
             <div className="form-control mt-6">
               <button className="btn btn-primary">Login</button>
             </div>

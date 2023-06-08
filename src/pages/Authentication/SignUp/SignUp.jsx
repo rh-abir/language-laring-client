@@ -2,6 +2,7 @@ import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../provider/AuthPorvider";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const { user, createUser, updateUSerProfile } = useContext(AuthContext);
@@ -53,7 +54,9 @@ const SignUp = () => {
           .then((result) => {
             console.log(result.user);
             updateUSerProfile(name, imageUrl)
-            .then(() => {})
+            .then(() => {
+              toast.success('Done !')
+            })
             .catch(err => {
               console.log(err.message)
             })
@@ -67,6 +70,7 @@ const SignUp = () => {
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row">
+        
         <div className="text-center lg:text-left lg:w-1/2">
           <h1 className="text-5xl font-bold">Login now!</h1>
           <p className="py-6">
@@ -75,8 +79,10 @@ const SignUp = () => {
             a id nisi.
           </p>
         </div>
+
         <div className="card flex-shrink-0 lg:w-1/2 max-w-sm shadow-2xl bg-base-100">
           <form onSubmit={handleSubmit(onSubmit)} className="card-body">
+
             <div className="form-control">
               <label className="label">
                 <span className="label-text">Name *</span>
@@ -130,7 +136,7 @@ const SignUp = () => {
                 type="file"
                 accept="image/*"
                 placeholder="image"
-                {...register("image")}
+                {...register("image", { required: true })}
                 className="input input-bordered"
               />
             </div>

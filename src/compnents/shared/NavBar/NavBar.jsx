@@ -1,22 +1,49 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../../provider/AuthPorvider";
+
+import avator from "../../../assets/img/avator.jpg";
+import logo from "../../../assets/img/logo.png";
+import { toast } from "react-toastify";
 
 const NavBar = () => {
+  const { user, logOut } = useContext(AuthContext);
+
   const navlink = (
     <>
       <li>
         <Link to="/">Home</Link>
       </li>
       <li>
-        <Link to="/">About</Link>
+        <Link to="/">Instructors</Link>
       </li>
       <li>
-        <Link to="/">Blog</Link>
+        <Link to="/">Classes</Link>
+      </li>
+      <li>
+        <Link to="/">Dashboard</Link>
+      </li>
+      <li>
+        <Link to="/">Service</Link>
       </li>
       <li>
         <Link to="/">Service</Link>
       </li>
     </>
   );
+
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {
+        // console.log()
+        toast.success("LogOut Successfully !");
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
+  console.log(user);
 
   return (
     <div className="bg-base-200 shadow-lg h-20">
@@ -46,43 +73,50 @@ const NavBar = () => {
               {navlink}
             </ul>
           </div>
-          <a className="btn btn-ghost normal-case text-xl">daisyUI</a>
+          <Link to="/" className="">
+            <img className="w-7/12" src={logo} alt="" />
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{navlink}</ul>
         </div>
         <div className="navbar-end">
           {/* uesr profile */}
-           
+          {!user ? (
+            <button className="btn btn-primary btn-outline">
+              <Link to="signIn">Log In</Link>
+            </button>
+          ) : (
             <div className="flex-none">
               <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full">
-                    <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+                    <img src={user ? user?.photoURL : avator} />
                   </div>
                 </label>
                 <ul
                   tabIndex={0}
                   className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52"
                 >
-                  <li>
-                    <a className="justify-between">
-                      Profile
-                      <span className="badge">New</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>Settings</a>
-                  </li>
-                  <li>
-                    <a>Logout</a>
-                  </li>
+                  {user && (
+                    <>
+                      <li>
+                        <Link className="justify-between">Dashboard</Link>
+                      </li>
+                      <li>
+                        <Link
+                          onClick={handleLogOut}
+                          className="justify-between"
+                        >
+                          Log Out
+                        </Link>
+                      </li>
+                    </>
+                  )}
                 </ul>
               </div>
             </div>
-
-
-
+          )}
         </div>
       </div>
     </div>
