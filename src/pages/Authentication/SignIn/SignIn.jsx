@@ -10,6 +10,7 @@ import { FiGithub } from "react-icons/fi";
 import Lottie from "lottie-react";
 
 import lottiPic from "../../../assets/img/lotti/login.json";
+import { saveUser } from "../../../api/auth";
 
 const SignIn = () => {
   const { signIn, googleSignIn, gitHubSignIn } = useContext(AuthContext);
@@ -44,6 +45,7 @@ const SignIn = () => {
     googleSignIn()
       .then((result) => {
         const loggedUsaer = result.user;
+        saveUser(result.user)
         console.log(loggedUsaer);
         toast.success("LogIn successfully");
       })
@@ -59,6 +61,9 @@ const SignIn = () => {
       .then((result) => {
         const loggedUsaer = result.user;
         console.log(loggedUsaer);
+
+        saveUser(result.user)
+
         toast.success("LogIn successfully");
       })
       .catch((err) => {

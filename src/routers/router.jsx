@@ -7,7 +7,7 @@ import Instructors from "../pages/Instructors/Instructors";
 import Classes from "../pages/Classes/Classes";
 import SignIn from "../pages/Authentication/SignIn/SignIn";
 import PrivateRouter from "./PrivateRouter";
-import Dashboard from "../pages/Dashboard/Dashboard";
+import DashboardLayout from "../Layout/DashboardLayout";
 
 const router = createBrowserRouter([
   {
@@ -21,10 +21,24 @@ const router = createBrowserRouter([
       },
       { path: "/signin", element: <SignIn></SignIn> },
       { path: "/signup", element: <SignUp></SignUp> },
-      { path: "/instructors", element: <PrivateRouter><Instructors></Instructors></PrivateRouter> },
-      { path: "/classes", element: <PrivateRouter><Classes></Classes></PrivateRouter> },
-      { path: "/dashboard", element: <PrivateRouter><Dashboard></Dashboard></PrivateRouter> },
+      {
+        path: "/instructors",
+        element: <Instructors></Instructors>,
+      },
+      {
+        path: "/classes",
+        element: <Classes></Classes>,
+      },
     ],
+  },
+
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRouter>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRouter>
+    ),
   },
 ]);
 

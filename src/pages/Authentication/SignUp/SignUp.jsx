@@ -9,6 +9,7 @@ import { FiGithub } from "react-icons/fi";
 import Lottie from "lottie-react";
 
 import lottiPic from "../../../assets/img/lotti/login.json";
+import { saveUser } from "../../../api/auth";
 
 const SignUp = () => {
   const { createUser, updateUSerProfile, googleSignIn, gitHubSignIn } =
@@ -60,6 +61,9 @@ const SignUp = () => {
         createUser(email, pass)
           .then((result) => {
             console.log(result.user);
+
+            saveUser(result.user)
+
             updateUSerProfile(name, imageUrl)
               .then(() => {
                 toast.success("Done !");
@@ -79,6 +83,7 @@ const SignUp = () => {
       .then((result) => {
         const loggedUsaer = result.user;
         console.log(loggedUsaer);
+        saveUser(result.user)
         toast.success("LogIn successfully");
       })
       .catch((err) => {
@@ -93,6 +98,7 @@ const SignUp = () => {
       .then((result) => {
         const loggedUsaer = result.user;
         console.log(loggedUsaer);
+        saveUser(result.user)
         toast.success("LogIn successfully");
       })
       .catch((err) => {

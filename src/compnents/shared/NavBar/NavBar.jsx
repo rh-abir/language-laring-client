@@ -21,11 +21,9 @@ const NavBar = () => {
       <li>
         <Link to="/classes">Classes</Link>
       </li>
-      {user && (
-        <li>
-          <Link to="/">Dashboard</Link>
-        </li>
-      )}
+      <li>
+        <Link to="/dashboard">Dashboard</Link>
+      </li>
     </>
   );
 
@@ -98,7 +96,9 @@ const NavBar = () => {
                   {user && (
                     <>
                       <li>
-                        <Link to='/dashboard' className="justify-between">Dashboard</Link>
+                        <Link to="/dashboard" className="justify-between">
+                          Dashboard
+                        </Link>
                       </li>
                       <li>
                         <Link

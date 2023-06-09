@@ -43,6 +43,7 @@ const AuthPorvider = ({ children }) => {
     useEffect(() => {
         const unsubscribe  = onAuthStateChanged(auth, loggedUser => {
             setUser(loggedUser)
+            console.log(loggedUser)
             setLoding(false)
         })
         return () => {
