@@ -4,13 +4,19 @@ import { AuthContext } from "../../../provider/AuthPorvider";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { FaFacebookF, FaGoogle } from "react-icons/fa";
+import { FaEye, FaEyeSlash, FaFacebookF, FaGoogle } from "react-icons/fa";
 import { FiGithub } from "react-icons/fi";
+
+import Lottie from "lottie-react";
+
+import lottiPic from "../../../assets/img/lotti/login.json";
 
 const SignIn = () => {
   const { signIn, googleSignIn, gitHubSignIn } = useContext(AuthContext);
 
   const [error, setError] = useState("");
+
+  const [isHiden, setIshiden] = useState(true);
 
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
@@ -63,17 +69,15 @@ const SignIn = () => {
   // console.log(user);
 
   return (
-    <div className="hero min-h-screen bg-base-200">
+    <div className="hero min-h-screen ">
       <div className="hero-content flex-col lg:flex-row">
-        <div className="text-center lg:text-left lg:w-1/2">
-          <h1 className="text-5xl font-bold">Login now!</h1>
-          <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+        <div className="text-center lg:text-left lg:w-6/12">
+          <h1 className="text-5xl font-bold">Login to Your Account !</h1>
+          <p className="-ms-4">
+            <Lottie animationData={lottiPic}> </Lottie>
           </p>
         </div>
-        <div className="card flex-shrink-0 lg:w-1/2 max-w-sm shadow-2xl bg-base-100">
+        <div className="card flex-shrink-0 lg:w-6/12 max-w-sm shadow-2xl bg-base-100">
           <form onSubmit={handleSubmit(onSubmit)} className="card-body">
             <div className="form-control">
               <label className="label">
@@ -81,27 +85,36 @@ const SignIn = () => {
               </label>
               <input
                 type="email"
-                {...register("email")}
+                {...register("email", { required: true })}
                 placeholder="email"
                 className="input input-bordered"
               />
             </div>
-            <div className="form-control">
+            <div className="form-control relative">
               <label className="label">
                 <span className="label-text">Password</span>
               </label>
               <input
-                type="password"
+                type={isHiden ? "password" : "text"}
                 placeholder="password"
-                {...register("password")}
+                {...register("password", { required: true })}
                 className="input input-bordered"
               />
+
+              <div
+                onClick={() => setIshiden(!isHiden)}
+                className="absolute cursor-pointer  right-4 mt-12 pt-1 text-[#555]"
+              >
+                {isHiden ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>}
+              </div>
             </div>
 
             <p className="text-center text-orange-600 font-semibold">{error}</p>
 
             <div className="form-control mt-6">
-              <button className="btn btn-primary">Login</button>
+              <button className="btn btn-outline hover:bg-[#362478]">
+                Login
+              </button>
             </div>
           </form>
           <div className="divider">OR</div>
@@ -109,27 +122,31 @@ const SignIn = () => {
           <div className="flex justify-center items-center gap-5">
             <button
               onClick={hangleGoogleSingIn}
-              className="btn btn-circle btn-outline text-red-400"
+              className="btn btn-circle hover:border-[#251A59] hover:bg-[#251A59] btn-outline text-[#251A59]"
             >
               <FaGoogle size="20"></FaGoogle>
             </button>
             {/* TODO */}
-            <button className="btn btn-circle btn-outline text-red-400">
+            <button className="btn btn-circle hover:border-[#251A59] hover:bg-[#251A59] btn-outline text-[#251A59]">
               <FaFacebookF size="20"></FaFacebookF>
             </button>
 
             <button
               onClick={hangleGitHubSingIn}
-              className="btn btn-circle btn-outline text-red-400"
+              className="btn btn-circle hover:border-[#251A59] hover:bg-[#251A59] btn-outline text-[#251A59]"
             >
               <FiGithub size="20"></FiGithub>
             </button>
           </div>
           <label className="label text-center">
-            <p className="text-centers mx-auto">
-              New Here ?
-              <Link className="label-text-alt link link-hover" to="/signup">
-                Sign up
+            <p className="text-centers mx-auto ">
+              New Here ? 
+
+              <Link
+                className="label-text-alt link link-hover text-[#251A59] underline font-bold text-base"
+                to="/signup"
+              >
+                 Sign up 
               </Link>
             </p>
           </label>
