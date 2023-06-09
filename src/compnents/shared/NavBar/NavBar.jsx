@@ -87,7 +87,7 @@ const NavBar = () => {
               <Link to="signIn">Log In</Link>
             </button>
           ) : (
-            <div className="flex-none">
+            <div className="flex-none z-10">
               <div className="dropdown dropdown-end">
                 <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                   <div className="w-10 rounded-full">
