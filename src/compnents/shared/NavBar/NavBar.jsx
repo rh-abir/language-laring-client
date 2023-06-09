@@ -16,10 +16,10 @@ const NavBar = () => {
       </li>
 
       <li>
-        <Link to="/">Instructors</Link>
+        <Link to="/instructors">Instructors</Link>
       </li>
       <li>
-        <Link to="/">Classes</Link>
+        <Link to="/classes">Classes</Link>
       </li>
       {user && (
         <li>
@@ -81,7 +81,7 @@ const NavBar = () => {
           {/* uesr profile */}
           {!user ? (
             <button className="btn btn-primary btn-outline">
-              <Link to="signIn">Log In</Link>
+              <Link to="signin">Log In</Link>
             </button>
           ) : (
             <div className="flex-none z-10">
@@ -98,7 +98,7 @@ const NavBar = () => {
                   {user && (
                     <>
                       <li>
-                        <Link className="justify-between">Dashboard</Link>
+                        <Link to='/dashboard' className="justify-between">Dashboard</Link>
                       </li>
                       <li>
                         <Link

@@ -6,8 +6,13 @@ import { toast } from "react-toastify";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
 import { FiGithub } from "react-icons/fi";
 
+import Lottie from "lottie-react";
+
+import lottiPic from "../../../assets/img/lotti/login.json";
+
 const SignUp = () => {
-  const { createUser, updateUSerProfile , googleSignIn, gitHubSignIn} = useContext(AuthContext);
+  const { createUser, updateUSerProfile, googleSignIn, gitHubSignIn } =
+    useContext(AuthContext);
 
   const [error, setError] = useState("");
 
@@ -101,11 +106,9 @@ const SignUp = () => {
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row">
         <div className="text-center lg:text-left lg:w-1/2">
-          <h1 className="text-5xl font-bold">Login now!</h1>
-          <p className="py-6">
-            Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda
-            excepturi exercitationem quasi. In deleniti eaque aut repudiandae et
-            a id nisi.
+          <h1 className="text-5xl font-bold">Create An Account!</h1>
+          <p className="-ms-4">
+            <Lottie animationData={lottiPic}> </Lottie>
           </p>
         </div>
 
@@ -172,7 +175,7 @@ const SignUp = () => {
             <p className="text-center text-orange-600 font-semibold">{error}</p>
 
             <div className="form-control mt-6">
-              <input className="btn btn-primary" type="submit" value="Log In" />
+              <input className="btn btn-outline hover:bg-[#362478]" type="submit" value="Sign Up" />
             </div>
           </form>
 
@@ -180,26 +183,27 @@ const SignUp = () => {
           <div className="flex justify-center items-center gap-5">
             <button
               onClick={hangleGoogleSingIn}
-              className="btn btn-circle btn-outline text-red-400"
+              className="btn btn-circle hover:border-[#251A59] hover:bg-[#251A59] btn-outline text-[#251A59]"
             >
               <FaGoogle size="20"></FaGoogle>
             </button>
             {/* TODO */}
-            <button className="btn btn-circle btn-outline text-red-400">
+            <button className="btn btn-circle hover:border-[#251A59] hover:bg-[#251A59] btn-outline text-[#251A59]">
               <FaFacebookF size="20"></FaFacebookF>
             </button>
 
             <button
               onClick={hangleGitHubSingIn}
-              className="btn btn-circle btn-outline text-red-400"
+              className="btn btn-circle hover:border-[#251A59] hover:bg-[#251A59] btn-outline text-[#251A59]"
             >
               <FiGithub size="20"></FiGithub>
             </button>
           </div>
           <label className="label">
             <p className="text-centers mx-auto">
-              Already a User?
-              <Link className="label-text-alt link link-hover" to="/signin">
+              Already a User ? 
+
+              <Link className="label-text-alt link link-hover  text-[#251A59] underline font-bold text-base" to="/signin">
                 LOGIN
               </Link>
             </p>
