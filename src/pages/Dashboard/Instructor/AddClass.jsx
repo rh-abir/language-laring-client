@@ -62,9 +62,6 @@ const AddClass = () => {
           console.log(err)
         })
 
-
-
-
       });
   };
 

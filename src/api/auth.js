@@ -4,6 +4,7 @@ export const saveUser = (user) => {
     const currentuser ={
         name: user.displayName,
         email: user.email,
+        roll: 'student',
 
     };
 

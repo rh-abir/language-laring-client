@@ -26,6 +26,12 @@ const SignUp = () => {
     const name = data.name;
     const confirmPass = data.ConfirmPassword;
 
+
+    // const logUSer ={
+    //   email, 
+    //   name
+    // }
+
     if (pass !== confirmPass) {
       return setError("Dose not mathc password");
     }
