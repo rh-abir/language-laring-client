@@ -3,14 +3,15 @@ import { BsArrowLeftShort } from "react-icons/bs";
 import { RiLogoutCircleRLine, RiDashboardFill } from "react-icons/ri";
 import { BiHomeCircle } from "react-icons/bi";
 import InstructorSidebar from "../InstructorSidebar/InstructorSidebar";
-// import AdminSidbar from "../AdminSidbar/AdminSidbar";
+import { Link } from "react-router-dom";
+import AdminSidbar from "../AdminSidbar/AdminSidbar";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
 
   const isUser = {
-    roll: 'instructor'
-  }
+    roll: "admin",
+  };
 
   return (
     <div className="flex">
@@ -37,30 +38,37 @@ const Sidebar = () => {
               !open && "scale-0"
             }`}
           >
-            {isUser.roll === 'instructor' && 'Instructor Dashboard' }
-            {isUser.roll === 'admin' && "Admin Dashboard" }
-            {isUser.roll === 'student' && "student Dashboard" }
+            {isUser.roll === "instructor" && "Instructor Dashboard"}
+            {isUser.roll === "admin" && "Admin Dashboard"}
+            {isUser.roll === "student" && "student Dashboard"}
           </h1>
         </div>
 
         <div className="flex flex-col  space-y-80 gap-10 mt-10">
-          {isUser.roll === 'instructor' && <InstructorSidebar open={open}></InstructorSidebar>}
-          {/* {<AdminSidbar open={open}></AdminSidbar>} */}
+          {isUser.roll === "instructor" && (
+            <InstructorSidebar open={open}></InstructorSidebar>
+          )}
+
+          {isUser.roll === "admin" && (
+            <AdminSidbar open={open}></AdminSidbar>
+          )}
 
           <ul className="pt-2">
             <li
-              className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-light-white rounded-md mt-2`}
+              className={`text-gray-300 text-sm  items-center cursor-pointer p-2 hover:bg-light-white rounded-md mt-2`}
             >
-              <span className="text-2xl block float-left">
-                <BiHomeCircle></BiHomeCircle>
-              </span>
-              <span
-                className={`text-base font-medium flex-1 duration-200 ${
-                  !open && "hidden"
-                }`}
-              >
-                Home
-              </span>
+              <Link to="/" className="flex gap-x-4">
+                <span className="text-2xl block float-left">
+                  <BiHomeCircle></BiHomeCircle>
+                </span>
+                <span
+                  className={`text-base font-medium flex-1 duration-200 ${
+                    !open && "hidden"
+                  }`}
+                >
+                  Home
+                </span>
+              </Link>
             </li>
             <li
               className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-light-white rounded-md mt-2`}

@@ -10,6 +10,7 @@ import PrivateRouter from "./PrivateRouter";
 import DashboardLayout from "../Layout/DashboardLayout";
 import AddClass from "../pages/Dashboard/Instructor/AddClass";
 import MyClasses from "../pages/Dashboard/Instructor/MyClasses";
+import MangeClass from "../pages/Dashboard/Admin/MangeClass";
 
 const router = createBrowserRouter([
   {
@@ -51,6 +52,11 @@ const router = createBrowserRouter([
         element: <AddClass></AddClass>,
       },
      
+      // adim route
+      {
+        path: 'manageclass',
+        element: <MangeClass></MangeClass>
+      },
     ],
   },
 ]);
