@@ -18,7 +18,7 @@ const PopularClasses = () => {
 
   return (
     <div className="my-20">
-      <TitleText text="Popular Classes"></TitleText>
+      <TitleText text="Our Popular Classes"></TitleText>
       <Container>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7 ">
           {allClases.map((cls) => (
