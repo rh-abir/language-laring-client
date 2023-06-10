@@ -1,16 +1,24 @@
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../provider/AuthPorvider";
-// import { getClassByUSer } from "../../../api/class";
+import { getClassByUSer } from "../../../api/class";
 
 const MyClasses = () => {
 
     const {user} = useContext(AuthContext)
 
-    // const [classes, setClasse] = useState([])
+    const [classes, setClasse] = useState([])
 
     console.log(user.email)
 
-    // getClassByUSer()
+    useEffect(() => {
+      getClassByUSer(user?.email)
+      .then(data => {
+        setClasse(data)
+      })
+    }, [user])
+
+    console.log(classes)
+
 
 
   return (

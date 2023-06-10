@@ -3,11 +3,14 @@ import { BsArrowLeftShort } from "react-icons/bs";
 import { RiLogoutCircleRLine, RiDashboardFill } from "react-icons/ri";
 import { BiHomeCircle } from "react-icons/bi";
 import InstructorSidebar from "../InstructorSidebar/InstructorSidebar";
+// import AdminSidbar from "../AdminSidbar/AdminSidbar";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
 
-  // const Instructor = true;
+  const isUser = {
+    roll: 'instructor'
+  }
 
   return (
     <div className="flex">
@@ -34,12 +37,15 @@ const Sidebar = () => {
               !open && "scale-0"
             }`}
           >
-            Instructor Dashboard
+            {isUser.roll === 'instructor' && 'Instructor Dashboard' }
+            {isUser.roll === 'admin' && "Admin Dashboard" }
+            {isUser.roll === 'student' && "student Dashboard" }
           </h1>
         </div>
 
         <div className="flex flex-col  space-y-80 gap-10 mt-10">
-          {<InstructorSidebar open={open}></InstructorSidebar>}
+          {isUser.roll === 'instructor' && <InstructorSidebar open={open}></InstructorSidebar>}
+          {/* {<AdminSidbar open={open}></AdminSidbar>} */}
 
           <ul className="pt-2">
             <li
