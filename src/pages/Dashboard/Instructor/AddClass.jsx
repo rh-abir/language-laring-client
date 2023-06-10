@@ -18,7 +18,6 @@ const AddClass = () => {
     const email = data.email;
     const price = parseFloat(data.price);
     const seats = parseInt(data.seats);
-    const status = "pending";
     const title = data.className;
 
     // uploade image
@@ -47,8 +46,10 @@ const AddClass = () => {
           className,
           name,
           email,
-          status,
           title,
+          enroll: 0,
+          status : "pending",
+
         };
         console.log(classData)
 
