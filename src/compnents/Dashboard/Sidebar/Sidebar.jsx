@@ -1,16 +1,13 @@
 import { useState } from "react";
-import { BsArrowLeftShort, BsSearch } from "react-icons/bs";
-import { AiFillEnvironment } from "react-icons/ai";
-import { RiDashboardFill } from "react-icons/ri";
+import { BsArrowLeftShort } from "react-icons/bs";
+import { RiLogoutCircleRLine, RiDashboardFill } from "react-icons/ri";
+import { BiHomeCircle } from "react-icons/bi";
+import InstructorSidebar from "../InstructorSidebar/InstructorSidebar";
 
 const Sidebar = () => {
   const [open, setOpen] = useState(true);
 
-  const Menus = [
-    { title: "Dashboard" },
-    { title: "Home" },
-    { title: "Logout" },
-  ];
+  // const Instructor = true;
 
   return (
     <div className="flex">
@@ -27,52 +24,54 @@ const Sidebar = () => {
         ></BsArrowLeftShort>
 
         <div className="inline-flex ">
-          <AiFillEnvironment
+          <RiDashboardFill
             className={`bg-amber-300 text-4xl rounded cursor-pointer block float-right mr-2 duration-500 ${
               open && "rotate-[360deg]"
             }`}
-          ></AiFillEnvironment>
+          ></RiDashboardFill>
           <h1
-            className={`text-white origin-left font-medium text-2xl duration-300 ${
+            className={`text-white origin-left font-medium text-xl duration-300 ${
               !open && "scale-0"
             }`}
           >
-            Tailwind
+            Instructor Dashboard
           </h1>
         </div>
 
-        <div
-          className={`flex items-center rounded-md bg-light-white mt-6 ${
-            !open ? "px-2.5" : "px-4"
-          } py-2`}
-        >
-          <BsSearch
-            className={`text-white text-lg block float-left cursor-pointer ${
-              open && "mr-2"
-            }`}
-          ></BsSearch>
-          <input
-            type={"search"}
-            className={`text-base bg-transparent w-full text-white focus:outline-none ${
-              !open && "hidden"
-            }`}
-            placeholder="Search"
-          />
-        </div>
+        <div className="flex flex-col  space-y-80 gap-10 mt-10">
+          {<InstructorSidebar open={open}></InstructorSidebar>}
 
-        <ul className="pt-2">
-          {Menus.map((menu, index) => (
-            <>
-              <li key={index} className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-light-white rounded-md mt-2`}>
-                <span className="text-2xl block float-left"><RiDashboardFill></RiDashboardFill></span>
-                <span className={`text-base font-medium flex-1 duration-200 ${!open && "hidden"}`}>{menu.title}</span>
-              </li>
-            </>
-          ))}
-        </ul>
-      </div>
-      <div className="p-7">
-        <h1 className="text-2xl font-semibold ">Hoem page</h1>
+          <ul className="pt-2">
+            <li
+              className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-light-white rounded-md mt-2`}
+            >
+              <span className="text-2xl block float-left">
+                <BiHomeCircle></BiHomeCircle>
+              </span>
+              <span
+                className={`text-base font-medium flex-1 duration-200 ${
+                  !open && "hidden"
+                }`}
+              >
+                Home
+              </span>
+            </li>
+            <li
+              className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-light-white rounded-md mt-2`}
+            >
+              <span className="text-2xl block float-left">
+                <RiLogoutCircleRLine></RiLogoutCircleRLine>
+              </span>
+              <span
+                className={`text-base font-medium flex-1 duration-200 ${
+                  !open && "hidden"
+                }`}
+              >
+                Logout
+              </span>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   );
