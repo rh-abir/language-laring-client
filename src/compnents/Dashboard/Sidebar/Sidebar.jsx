@@ -1,17 +1,31 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { BsArrowLeftShort } from "react-icons/bs";
 import { RiLogoutCircleRLine, RiDashboardFill } from "react-icons/ri";
 import { BiHomeCircle } from "react-icons/bi";
 import InstructorSidebar from "../InstructorSidebar/InstructorSidebar";
 import { Link } from "react-router-dom";
 import AdminSidbar from "../AdminSidbar/AdminSidbar";
+import { getRole } from "../../../api/auth";
+import { AuthContext } from "../../../provider/AuthPorvider";
+import StudentSidbar from "../StudentSidbar/StudentSidbar";
 
 const Sidebar = () => {
+
+  const {user} = useContext(AuthContext)
+  console.log(user)
+
   const [open, setOpen] = useState(true);
 
-  const isUser = {
-    roll: "admin",
-  };
+  const [role, setRole] = useState();
+  useEffect(() => {
+    getRole(user?.email)
+    .then(data => {
+      setRole(data)
+      console.log('sidebar user',data)
+    })
+  }, [user])
+
+console.log(role)
 
   return (
     <div className="flex">
@@ -34,24 +48,30 @@ const Sidebar = () => {
             }`}
           ></RiDashboardFill>
           <h1
-            className={`text-white origin-left font-medium text-xl duration-300 ${
+            className={`text-white origin-left font-medium  duration-300 ${
               !open && "scale-0"
             }`}
           >
-            {isUser.roll === "instructor" && "Instructor Dashboard"}
-            {isUser.roll === "admin" && "Admin Dashboard"}
-            {isUser.roll === "student" && "student Dashboard"}
+            {role?.role === "instructor" && "Instructor Dashboard"}
+            {role?.role === "admin" && "Admin Dashboard"}
+            {role?.role === "student" && "Student Dashboard"}
           </h1>
         </div>
 
         <div className="flex flex-col  space-y-80 gap-10 mt-10">
-          {isUser.roll === "instructor" && (
+          {role?.role === "instructor" && (
             <InstructorSidebar open={open}></InstructorSidebar>
           )}
 
-          {isUser.roll === "admin" && (
+          {role?.role === "admin" && (
             <AdminSidbar open={open}></AdminSidbar>
           )}
+
+          {role?.role === "student" && (
+            <StudentSidbar open={open}></StudentSidbar>
+          )}
+
+          
 
           <ul className="pt-2">
             <li

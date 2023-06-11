@@ -1,11 +1,10 @@
-// save all user
-
+// save a user
 export const saveUser = (user) => {
   const currentuser = {
     name: user.displayName,
     image: user.photoURL,
     email: user.email,
-    roll: "student",
+    role: "student",
 
   };
 
@@ -21,6 +20,15 @@ export const saveUser = (user) => {
       console.log(data);
     });
 };
+
+
+// get a user and role 
+
+export const getRole =async (email) => {
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/user/${email}`);
+  const data = await res.json()
+  return data;
+}
 
 // get all user
 

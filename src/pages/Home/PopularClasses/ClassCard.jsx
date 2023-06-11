@@ -15,7 +15,7 @@ const ClassCard = ({cls}) => {
         <h2 className="card-title">$ {cls.price}</h2>
         <p>{}</p>
         <div className="card-actions justify-end">
-          <button className="btn btn-primary">Buy Now</button>
+          <button className="btn btn-outline btn-xs ">book</button>
         </div>
       </div>
     </div>
