@@ -12,7 +12,7 @@ import StudentSidbar from "../StudentSidbar/StudentSidbar";
 const Sidebar = () => {
 
   const {user} = useContext(AuthContext)
-  console.log(user)
+  // console.log(user)
 
   const [open, setOpen] = useState(true);
 
@@ -21,11 +21,11 @@ const Sidebar = () => {
     getRole(user?.email)
     .then(data => {
       setRole(data)
-      console.log('sidebar user',data)
+      // console.log('sidebar user',data)
     })
   }, [user])
 
-console.log(role)
+// console.log(role)
 
   return (
     <div className="flex">

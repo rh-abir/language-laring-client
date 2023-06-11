@@ -13,6 +13,8 @@ import MangeClass from "../pages/Dashboard/Admin/MangeClass";
 import ManageUser from "../pages/Dashboard/Admin/ManageUser";
 import AllClass from "../pages/AllClass/AllClass";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
+import SelecedPage from "../pages/Dashboard/Student/SeletedPage/SelecedPage";
+import EnrollPage from "../pages/Dashboard/Student/EnrollPage/EnrollPage";
 
 const router = createBrowserRouter([
   {
@@ -62,6 +64,18 @@ const router = createBrowserRouter([
       {
         path: "manageuser",
         element: <ManageUser></ManageUser>,
+      },
+
+      //Student route
+
+      {
+        path: "selected",
+        element: <SelecedPage></SelecedPage>,
+      },
+
+      {
+        path: "enroll",
+        element: <EnrollPage></EnrollPage>,
       },
     ],
   },

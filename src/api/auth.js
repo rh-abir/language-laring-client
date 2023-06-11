@@ -25,7 +25,7 @@ export const saveUser = (user) => {
 // get a user and role 
 
 export const getRole =async (email) => {
-  const res = await fetch(`${import.meta.env.VITE_API_URL}/user/${email}`);
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/users/${email}`);
   const data = await res.json()
   return data;
 }
@@ -37,4 +37,4 @@ export const getAlluser = async () => {
 
   const data = await res.json();
   return data;
-};
+}; 

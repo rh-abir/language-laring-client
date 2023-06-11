@@ -9,7 +9,7 @@ const StudentSidbar = ({ open }) => {
           <li
             className={`text-gray-300 text-sm  items-center gap-x-4 cursor-pointer p-2 hover:bg-light-white rounded-md mt-2`}
           >
-            <Link to="manageclass" className="flex gap-x-4">
+            <Link to="selected" className="flex gap-x-4">
               <span className="text-2xl block float-left">
                 <IoIosAddCircleOutline></IoIosAddCircleOutline>
               </span>
@@ -25,7 +25,7 @@ const StudentSidbar = ({ open }) => {
           <li
             className={`text-gray-300 text-sm flex items-center  cursor-pointer p-2 hover:bg-light-white rounded-md mt-2`}
           >
-            <Link to="manageuser" className="flex gap-x-4 ">
+            <Link to="enroll" className="flex gap-x-4 ">
               <span className="text-2xl block float-left">
                 <MdStorage></MdStorage>
               </span>

@@ -1,5 +1,8 @@
 
-const ClassCard = ({cls}) => {
+const ClassCard = ({cls, handleSelect}) => {
+
+
+
   return (
     <div className="card card-compact w-96 bg-base-100 shadow-xl">
       <figure>
@@ -15,7 +18,7 @@ const ClassCard = ({cls}) => {
         <h2 className="card-title">$ {cls.price}</h2>
         <p>{}</p>
         <div className="card-actions justify-end">
-          <button className="btn btn-outline btn-xs ">book</button>
+          <button onClick={() => handleSelect(cls)} className="btn btn-outline btn-xs ">book</button>
         </div>
       </div>
     </div>
