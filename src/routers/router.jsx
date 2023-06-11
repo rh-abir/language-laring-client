@@ -1,10 +1,9 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../Layout/Main";
 import Home from "../pages/Home/Home/Home";
-
 import SignUp from "../pages/Authentication/SignUp/SignUp";
 import Instructors from "../pages/Instructors/Instructors";
-import Classes from "../pages/Classes/Classes";
+
 import SignIn from "../pages/Authentication/SignIn/SignIn";
 import PrivateRouter from "./PrivateRouter";
 import DashboardLayout from "../Layout/DashboardLayout";
@@ -12,6 +11,7 @@ import AddClass from "../pages/Dashboard/Instructor/AddClass";
 import MyClasses from "../pages/Dashboard/Instructor/MyClasses";
 import MangeClass from "../pages/Dashboard/Admin/MangeClass";
 import ManageUser from "../pages/Dashboard/Admin/ManageUser";
+import AllClass from "../pages/AllClass/AllClass";
 
 const router = createBrowserRouter([
   {
@@ -31,7 +31,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/classes",
-        element: <Classes></Classes>,
+        element: <AllClass></AllClass>,
       },
     ],
   },
@@ -52,15 +52,15 @@ const router = createBrowserRouter([
         path: "addclass",
         element: <AddClass></AddClass>,
       },
-     
+
       // adim route
       {
-        path: 'manageclass',
-        element: <MangeClass></MangeClass>
+        path: "manageclass",
+        element: <MangeClass></MangeClass>,
       },
       {
-        path: 'manageuser',
-        element: <ManageUser></ManageUser>
+        path: "manageuser",
+        element: <ManageUser></ManageUser>,
       },
     ],
   },
