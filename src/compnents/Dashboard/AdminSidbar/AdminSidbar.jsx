@@ -23,9 +23,9 @@ const AdminSidbar = ({ open }) => {
           </Link>
         </li>
         <li
-          className={`text-gray-300 text-sm flex items-center gap-x-4 cursor-pointer p-2 hover:bg-light-white rounded-md mt-2`}
+          className={`text-gray-300 text-sm flex items-center  cursor-pointer p-2 hover:bg-light-white rounded-md mt-2`}
         >
-          <Link to="myclass">
+          <Link to="manageuser" className="flex gap-x-4 ">
             <span className="text-2xl block float-left">
               <MdStorage></MdStorage>
             </span>
