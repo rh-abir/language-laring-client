@@ -26,9 +26,8 @@ const SignUp = () => {
     const name = data.name;
     const confirmPass = data.ConfirmPassword;
 
-
     // const logUSer ={
-    //   email, 
+    //   email,
     //   name
     // }
 
@@ -68,10 +67,9 @@ const SignUp = () => {
           .then((result) => {
             console.log(result.user);
 
-            saveUser(result.user)
-
             updateUSerProfile(name, imageUrl)
               .then(() => {
+                saveUser(result.user);
                 toast.success("Done !");
               })
               .catch((err) => {
@@ -89,7 +87,7 @@ const SignUp = () => {
       .then((result) => {
         const loggedUsaer = result.user;
         console.log(loggedUsaer);
-        saveUser(result.user)
+        saveUser(result.user);
         toast.success("LogIn successfully");
       })
       .catch((err) => {
@@ -104,7 +102,7 @@ const SignUp = () => {
       .then((result) => {
         const loggedUsaer = result.user;
         console.log(loggedUsaer);
-        saveUser(result.user)
+        saveUser(result.user);
         toast.success("LogIn successfully");
       })
       .catch((err) => {
@@ -187,7 +185,11 @@ const SignUp = () => {
             <p className="text-center text-orange-600 font-semibold">{error}</p>
 
             <div className="form-control mt-6">
-              <input className="btn btn-outline hover:bg-[#362478]" type="submit" value="Sign Up" />
+              <input
+                className="btn btn-outline hover:bg-[#362478]"
+                type="submit"
+                value="Sign Up"
+              />
             </div>
           </form>
 
@@ -213,9 +215,11 @@ const SignUp = () => {
           </div>
           <label className="label">
             <p className="text-centers mx-auto">
-              Already a User ? 
-
-              <Link className="label-text-alt link link-hover  text-[#251A59] underline font-bold text-base" to="/signin">
+              Already a User ?
+              <Link
+                className="label-text-alt link link-hover  text-[#251A59] underline font-bold text-base"
+                to="/signin"
+              >
                 LOGIN
               </Link>
             </p>

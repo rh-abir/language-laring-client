@@ -12,12 +12,13 @@ import MyClasses from "../pages/Dashboard/Instructor/MyClasses";
 import MangeClass from "../pages/Dashboard/Admin/MangeClass";
 import ManageUser from "../pages/Dashboard/Admin/ManageUser";
 import AllClass from "../pages/AllClass/AllClass";
+import ErrorPage from "../pages/ErrorPage/ErrorPage";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Main></Main>,
-    errorElement: <p>This is Error page</p>,
+    errorElement: <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
