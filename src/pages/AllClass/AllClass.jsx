@@ -16,7 +16,7 @@ const AllClass = () => {
     console.log(allClass)
 
   return (
-    <div>
+    <div className="max-w-7xl mx-auto my-20">
       <TitleText text={"All Class"}></TitleText>
 
       <div className="grid md:grid-cols-2 lg:grid-cols-3">
