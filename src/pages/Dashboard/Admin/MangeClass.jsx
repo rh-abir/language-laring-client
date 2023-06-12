@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { getAllCalss } from "../../../api/class";
+// import { useQuery } from "react-query";
 import TitleText from "../../../compnents/TitleText/TitleText";
+import { updateClassStatus } from "../../../api/select";
 
 const MangeClass = () => {
   const [allClass, setAllClass] = useState([]);
@@ -11,7 +13,15 @@ const MangeClass = () => {
     });
   }, []);
 
-  console.log(allClass);
+
+  const handleUpdateClassStatus = (id) => {
+    console.log(id)
+    updateClassStatus(id, "approve")
+    .then(data => {
+      console.log(data)
+    })
+  }
+
   return (
     <div className="mx-20 mt-20 ">
       <TitleText text={"Manage Classes"}></TitleText>
@@ -57,7 +67,7 @@ const MangeClass = () => {
                     <td>{clas.title}</td>
                     <td>{clas.name} </td>
                     <td>{clas.email} </td>
-                    <td>{clas.seats} </td>
+                    <td>{clas.seats } </td>
                     <td>{clas.price} </td>
                     <td>
                       <button className="btn btn-xs cursor-default">
@@ -65,7 +75,7 @@ const MangeClass = () => {
                       </button>
                     </td>
                     <td className="space-x-3">
-                      <button className="btn btn-outline btn-primary btn-xs">
+                      <button onClick={() => handleUpdateClassStatus(clas._id)} className="btn btn-outline btn-primary btn-xs">
                         Approve
                       </button>
                       <button className="btn btn-outline btn-secondary btn-xs">

@@ -15,6 +15,11 @@ const AllClass = () => {
 
     console.log(allClass)
 
+
+    
+
+
+
   return (
     <div className="max-w-7xl mx-auto my-20">
       <TitleText text={"All Class"}></TitleText>

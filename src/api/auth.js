@@ -37,6 +37,21 @@ export const makeInstructor  = (email) => {
 }
 
 
+// make a Instructor
+export const makeAdmin  = (email) => {
+  const currentUser = {
+    role: 'admin',
+  }
+  return fetch(`${import.meta.env.VITE_API_URL}/users/${email}`, {
+    method: 'PUT',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(currentUser),
+  }).then(res => res.json())
+}
+
+
 
 // get a user and role 
 

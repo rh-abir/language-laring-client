@@ -20,14 +20,32 @@ export const getSelectsClass = async (email) => {
   return data;
 };
 
-//delete select class by id TODO
-export const deleteSelectClass = async (id) => {
-  const res = await fetch(`${import.meta.env.VITE_API_URL}/select/${id}`, {
-    method: "DELETE",
-    headers: {
-      "content-type": "application/json",
+// class update Status
+export const updateClassStatus = async (id, status) => {
+  const response = await fetch(
+    `${import.meta.env.VITE_API_URL}/class/status/${id}`,
+    {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ status }),
     }
-  });
-  const data = await res.json();
+  );
+  const data = await response.json();
   return data;
 };
+
+//delete select class by id TODO
+
+
+// export const deleteSelectClass = async (id) => {
+//   const res = await fetch(`${import.meta.env.VITE_API_URL}/select/${id}`, {
+//     method: "DELETE",
+//     headers: {
+//       "content-type": "application/json",
+//     }
+//   });
+//   const data = await res.json();
+//   return data;
+// };

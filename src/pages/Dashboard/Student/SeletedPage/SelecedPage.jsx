@@ -1,42 +1,50 @@
-import { useContext} from "react";
+import { useContext, useEffect, useState } from "react";
 import TitleText from "../../../../compnents/TitleText/TitleText";
 import { AuthContext } from "../../../../provider/AuthPorvider";
-import { useQuery } from "@tanstack/react-query";
-import { deleteSelectClass } from "../../../../api/select";
+// import { useQuery } from "@tanstack/react-query";
+// import { deleteSelectClass } from "../../../../api/select";
 
 const SelecedPage = () => {
   const { user } = useContext(AuthContext);
 
+  // const { data: selectClass = [], refetch } = useQuery({
+  //   queryKey: ["select", user?.email],
+
+  //   queryFn: async () => {
+  //     const res = await fetch(`http://localhost:5000/select/${user?.email}`);
+  //     const data = await res.json();
+  //     // console.log("res from axios", data);
+  //     return data;
+  //   },
+  // });
 
 
-  
-const { data: selectClass = [], refetch } = useQuery({
-    queryKey: ["rooms", user?.email],
-    queryFn: async () => {
-      const res = await fetch( `http://localhost:5000/select/${user?.email}`);
-    //   console.log("react query data", res);
-      return res.json()
-    },
+const [selectClass, setSelectClass] = useState([])
 
-    
-  });
+useEffect(() => {
+  fetch(`http://localhost:5000/select/${user?.email}`)
+  .then(res => res.json())
+  .then(data => {
+    setSelectClass(data)
+  })
+}, [user])
 
 
-  console.log(selectClass)
-  
+//  TODO don't to delete 
+
+  // console.log(selectClass);
+
   const handlerDelte = (id) => {
     console.log("delete handlaer", id);
-    deleteSelectClass(id)
-    .then(data => {
-        refetch()
-        console.log(data)
+
+    fetch(`http://localhost:5000/selects/${id}`, {
+      method: "DELETE"
     })
-
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
+    })
   };
-
-
-
-
 
   return (
     <div className="mx-20 mt-20 ">
@@ -56,7 +64,7 @@ const { data: selectClass = [], refetch } = useQuery({
           </thead>
           <tbody>
             {/* row 1 */}
-            {selectClass.map((selected, index) => (
+            {selectClass?.map((selected, index) => (
               <tr key={selected._id}>
                 <td>{index + 1}</td>
                 <td>
@@ -85,7 +93,7 @@ const { data: selectClass = [], refetch } = useQuery({
                 </td>
                 <td>
                   <button
-                    onClick={() => handlerDelte(selected._id)}
+                    onClick={() => handlerDelte(selected?._id)}
                     className="btn btn-outline btn-secondary btn-xs"
                   >
                     Delete
