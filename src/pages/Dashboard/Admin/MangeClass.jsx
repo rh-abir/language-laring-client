@@ -1,26 +1,35 @@
-import { useEffect, useState } from "react";
-import { getAllCalss } from "../../../api/class";
+// import { useEffect, useState } from "react";
+// import { getAllCalss } from "../../../api/class";
 // import { useQuery } from "react-query";
 import TitleText from "../../../compnents/TitleText/TitleText";
 import { updateClassStatus } from "../../../api/select";
+import { useQuery } from "@tanstack/react-query";
 
 const MangeClass = () => {
-  const [allClass, setAllClass] = useState([]);
+  // const [allClass, setAllClass] = useState([]);
 
-  useEffect(() => {
-    getAllCalss().then((data) => {
-      setAllClass(data);
-    });
-  }, []);
+  // useEffect(() => {
+  //   getAllCalss().then((data) => {
+  //     setAllClass(data);
+  //   });
+  // }, []);
 
+  const {data : allClass =[] , refetch } = useQuery({
+    queryKey: ["classes"],
+    queryFn: async () => {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/class`);
+      const data = await res.json();
+      return data;
+    },
+  });
 
   const handleUpdateClassStatus = (id) => {
-    console.log(id)
-    updateClassStatus(id, "approve")
-    .then(data => {
-      console.log(data)
-    })
-  }
+    console.log(id);
+    updateClassStatus(id, "approve").then((data) => {
+      console.log(data);
+      refetch()
+    });
+  };
 
   return (
     <div className="mx-20 mt-20 ">
@@ -46,47 +55,50 @@ const MangeClass = () => {
             <tbody>
               {/* row 1 */}
               {allClass.map((clas) => (
-                <>
-                  <tr key={clas._id}>
-                    <td>
-                      {/* TODO : make number dinamic */}
-                      {1}
-                    </td>
-                    <td>
-                      <div className="flex items-center space-x-3">
-                        <div className="avatar">
-                          <div className="mask mask-squircle w-12 h-12">
-                            <img
-                              src={clas.imageUrl}
-                              alt="Avatar Tailwind CSS Component"
-                            />
-                          </div>
+                <tr key={clas._id}>
+                  <td>
+                    {/* TODO : make number dinamic */}
+                    {1}
+                  </td>
+                  <td>
+                    <div className="flex items-center space-x-3">
+                      <div className="avatar">
+                        <div className="mask mask-squircle w-12 h-12">
+                          <img
+                            src={clas.imageUrl}
+                            alt="Avatar Tailwind CSS Component"
+                          />
                         </div>
                       </div>
-                    </td>
-                    <td>{clas.title}</td>
-                    <td>{clas.name} </td>
-                    <td>{clas.email} </td>
-                    <td>{clas.seats } </td>
-                    <td>{clas.price} </td>
-                    <td>
-                      <button className="btn btn-xs cursor-default">
-                        {clas.status}
-                      </button>
-                    </td>
-                    <td className="space-x-3">
-                      <button onClick={() => handleUpdateClassStatus(clas._id)} className="btn btn-outline btn-primary btn-xs">
-                        Approve
-                      </button>
-                      <button className="btn btn-outline btn-secondary btn-xs">
-                        Deny
-                      </button>
-                      <button className="btn btn-outline btn-accent btn-xs">
-                        feedback
-                      </button>
-                    </td>
-                  </tr>
-                </>
+                    </div>
+                  </td>
+                  <td>{clas.title}</td>
+                  <td>{clas.name} </td>
+                  <td>{clas.email} </td>
+                  <td>{clas.seats} </td>
+                  <td>{clas.price} </td>
+                  <td>
+                    <button className="btn btn-xs cursor-default">
+                      {clas.status}
+                    </button>
+                  </td>
+                  <td className="space-x-3">
+                    <button
+                      onClick={() => handleUpdateClassStatus(clas._id)}
+                      className={`btn btn-outline btn-primary btn-xs ${
+                        clas.seats === ""
+                      }`}
+                    >
+                      Approve
+                    </button>
+                    <button className="btn btn-outline btn-secondary btn-xs">
+                      Deny
+                    </button>
+                    <button className="btn btn-outline btn-accent btn-xs">
+                      feedback
+                    </button>
+                  </td>
+                </tr>
               ))}
             </tbody>
           </table>
