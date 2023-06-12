@@ -4,8 +4,6 @@ export const saveUser = (user) => {
     name: user.displayName,
     image: user.photoURL,
     email: user.email,
-    role: "student",
-
   };
 
   fetch(`${import.meta.env.VITE_API_URL}/users/${user?.email}`, {
@@ -17,9 +15,27 @@ export const saveUser = (user) => {
   })
     .then((res) => res.json())
     .then((data) => {
-      console.log(data);
+      console.log(data);  
     });
 };
+
+
+
+// make a Instructor
+export const makeInstructor  = (email) => {
+  const currentUser = {
+    role: 'instructor',
+  }
+
+  return fetch(`${import.meta.env.VITE_API_URL}/users/${email}`, {
+    method: 'PUT',
+    headers: {
+      'content-type': 'application/json',
+    },
+    body: JSON.stringify(currentUser),
+  }).then(res => res.json())
+}
+
 
 
 // get a user and role 

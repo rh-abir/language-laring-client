@@ -21,9 +21,9 @@ const NavBar = () => {
       <li>
         <Link to="/classes">Classes</Link>
       </li>
-      <li>
+      { user && <li>
         <Link to="/dashboard">Dashboard</Link>
-      </li>
+      </li>}
     </>
   );
 

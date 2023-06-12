@@ -12,7 +12,7 @@ import StudentSidbar from "../StudentSidbar/StudentSidbar";
 const Sidebar = () => {
 
   const {user} = useContext(AuthContext)
-  // console.log(user)
+  console.log(user)
 
   const [open, setOpen] = useState(true);
 
@@ -54,7 +54,7 @@ const Sidebar = () => {
           >
             {role?.role === "instructor" && "Instructor Dashboard"}
             {role?.role === "admin" && "Admin Dashboard"}
-            {role?.role === "student" && "Student Dashboard"}
+            {!role?.role && "Student Dashboard"}
           </h1>
         </div>
 
@@ -67,7 +67,7 @@ const Sidebar = () => {
             <AdminSidbar open={open}></AdminSidbar>
           )}
 
-          {role?.role === "student" && (
+          {!role?.role && (
             <StudentSidbar open={open}></StudentSidbar>
           )}
 
