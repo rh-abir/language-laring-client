@@ -1,6 +1,6 @@
-import { useEffect, useState } from "react";
-// import { useQuery } from "react-query";
-import { getAlluser, makeAdmin, makeInstructor } from "../../../api/auth";
+
+import { useQuery } from "@tanstack/react-query";
+import {  makeAdmin, makeInstructor } from "../../../api/auth";
 import TitleText from "../../../compnents/TitleText/TitleText";
 import { toast } from "react-toastify";
 // import { AuthContext } from "../../../provider/AuthPorvider";
@@ -8,32 +8,32 @@ import { toast } from "react-toastify";
 const ManageUser = () => {
   //  TODO Conver to
 
-  const [allUser, setAllUser] = useState([]);
+  // const [allUser, setAllUser] = useState([]);
 
-  useEffect(() => {
-    getAlluser().then((data) => {
-      setAllUser(data);
-    });
-  }, []);
-
-  console.log(allUser);
-
-  // const { data: allUser = []  } = useQuery({
-  //   queryKey: ["users"],
-  //   queryFn: async () => {
-  //     const res = await fetch(`http://localhost:5000/users`);
-  //     //   console.log("react query data", res);
-  //     return res.json();
-  //   },
-  // });
+  // useEffect(() => {
+  //   getAlluser().then((data) => {
+  //     setAllUser(data);
+  //   });
+  // }, []);
 
   // console.log(allUser);
+
+  const { data: allUser = [], refetch } = useQuery({
+    queryKey: ["users"],
+    queryFn: async () => {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/users`);
+
+      const data = await res.json();
+      return data;
+    },
+  });
 
   const handlemakeInstructor = (email) => {
     console.log(email);
     makeInstructor(email).then((data) => {
       if (data.modifiedCount > 0) {
         // const data = "hello";
+        refetch()
         toast.success("Done !");
       }
     });
@@ -43,6 +43,7 @@ const ManageUser = () => {
     console.log(email);
     makeAdmin(email).then((data) => {
       console.log(data);
+      refetch()
     });
   };
 

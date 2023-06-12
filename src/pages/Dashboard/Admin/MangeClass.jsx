@@ -23,13 +23,24 @@ const MangeClass = () => {
     },
   });
 
-  const handleUpdateClassStatus = (id) => {
+  const handleApproveClass = (id) => {
     console.log(id);
     updateClassStatus(id, "approve").then((data) => {
       console.log(data);
       refetch()
     });
   };
+
+
+  const handleDenyClass = (id) => {
+    console.log(id);
+    updateClassStatus(id, "deny").then((data) => {
+      console.log(data);
+      refetch()
+    });
+  };
+
+
 
   return (
     <div className="mx-20 mt-20 ">
@@ -84,14 +95,14 @@ const MangeClass = () => {
                   </td>
                   <td className="space-x-3">
                     <button
-                      onClick={() => handleUpdateClassStatus(clas._id)}
+                      onClick={() => handleApproveClass(clas._id)}
                       className={`btn btn-outline btn-primary btn-xs ${
                         clas.seats === ""
                       }`}
                     >
                       Approve
                     </button>
-                    <button className="btn btn-outline btn-secondary btn-xs">
+                    <button onClick={() => handleDenyClass(clas._id)} className="btn btn-outline btn-secondary btn-xs">
                       Deny
                     </button>
                     <button className="btn btn-outline btn-accent btn-xs">
