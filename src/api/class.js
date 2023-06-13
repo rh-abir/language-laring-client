@@ -22,6 +22,15 @@ export const getAllCalss = async () => {
   return data;
 };
 
+
+
+// get approve Calss 
+export const getAllApproveCalss = async () => {
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/approveclass`);
+  const data = await res.json();
+  return data;
+};
+
 // get all calss by user
 
 export const getClassByUSer = async (email) => {

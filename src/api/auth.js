@@ -69,3 +69,13 @@ export const getAlluser = async () => {
   const data = await res.json();
   return data;
 }; 
+
+
+
+// get all instructos 
+export const getAllinstructor = async () => {
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/instructos`);
+
+  const data = await res.json();
+  return data;
+}; 

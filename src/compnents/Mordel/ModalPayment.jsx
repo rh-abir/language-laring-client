@@ -6,6 +6,7 @@ const ModalPayment = ({ index, money, product }) => {
     data.mony = money;
     data.product = product;
     
+
     console.log(data);
     fetch(`${import.meta.env.VITE_API_URL}/order`, {
       method: "POST",

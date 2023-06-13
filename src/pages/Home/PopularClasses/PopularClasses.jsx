@@ -19,7 +19,7 @@ const PopularClasses = () => {
     });
   }, []);
 
-  console.log(allClases);
+  // console.log('all calss for HOme', allClases);
 
   const handleSelect = (seleted) => {
     const selected = seleted;

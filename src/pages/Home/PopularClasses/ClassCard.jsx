@@ -1,5 +1,5 @@
 const ClassCard = ({ cls, handleSelect }) => {
-  console.log(cls);
+  // console.log(cls);
 
   return (
     <div className="card card-compact w-full bg-base-100 shadow-xl">

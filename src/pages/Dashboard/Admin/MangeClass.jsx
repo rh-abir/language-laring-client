@@ -57,11 +57,11 @@ const MangeClass = () => {
             </thead>
             <tbody>
               {/* row 1 */}
-              {allClass.map((clas) => (
+              {allClass.map((clas, index) => (
                 <tr key={clas._id}>
                   <td>
                     {/* TODO : make number dinamic */}
-                    {1}
+                    { index + 1}
                   </td>
                   <td>
                     <div className="flex items-center space-x-3">

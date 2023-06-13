@@ -7,7 +7,7 @@ import { AuthContext } from "../../../../provider/AuthPorvider";
 const EnrollPage = () => {
 
   const {user} = useContext(AuthContext)
-    const {data : PaymetClass =[] , refetch } = useQuery({
+    const {data : PaymetClass =[] } = useQuery({
         queryKey: ["classes"],
         queryFn: async () => {
           const res = await fetch(`${import.meta.env.VITE_API_URL}/payment/${user.email}`);

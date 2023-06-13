@@ -1,18 +1,21 @@
 const InstructorCard = ({ instructor }) => {
+  // console.log(instructor);
   return (
-    <div className="card w-full glass">
+    <div className="card w-full border-b-2">
       <figure>
         <img
-          className="w-[100%] h-[200px]"
+          className="rounded-full w-[200px] h-[200px]"
           src={instructor?.image}
           alt="car!"
         />
       </figure>
       <div className="card-body">
-        <p>How to park your car at your garage?</p>
-        <div className="card-actions">
-          <button className="btn btn-primary">See Classes!</button>
-        </div>
+        <h2 className="text-center -mt-5">{instructor.name}</h2>
+        <div className="border w-20 mx-auto"></div>
+        <p>
+          Teach and supervise students using lectures, demonstrations,
+          discussion groups, laboratory workshop sessions,
+        </p>
       </div>
     </div>
   );
