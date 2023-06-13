@@ -1,5 +1,19 @@
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../../provider/AuthPorvider";
+import { getRole } from "../../../api/auth";
+
 const ClassCard = ({ cls, handleSelect }) => {
   // console.log(cls);
+
+  const { user } = useContext(AuthContext);
+
+  const [role, setRole] = useState();
+  useEffect(() => {
+    getRole(user?.email).then((data) => {
+      setRole(data);
+      // console.log('sidebar user',data)
+    });
+  }, [user]);
 
   return (
     <div className="card card-compact w-full bg-base-100 shadow-xl">
@@ -12,12 +26,18 @@ const ClassCard = ({ cls, handleSelect }) => {
         {/* <h2 className="card-title">$ {}</h2> */}
         <p> $ {cls.price}</p>
         <div className="card-actions justify-end">
-          <button
-            onClick={() => handleSelect(cls)}
-            className="btn btn-outline btn-xs "
-          >
-            book
-          </button>
+          {role?.role === "admin" || role?.role === "instructor" ? (
+            <button className="btn btn-outline btn-xs " disabled>
+              book
+            </button>
+          ) : (
+            <button
+              onClick={() => handleSelect(cls)}
+              className="btn btn-outline btn-xs "
+            >
+              book
+            </button>
+          )}
         </div>
       </div>
     </div>

@@ -12,7 +12,6 @@ import StudentSidbar from "../StudentSidbar/StudentSidbar";
 const Sidebar = () => {
 
   const {user} = useContext(AuthContext)
-  console.log(user)
 
   const [open, setOpen] = useState(true);
 
