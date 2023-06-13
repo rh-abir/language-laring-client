@@ -1,18 +1,10 @@
-// import { useEffect, useState } from "react";
-// import { getAllCalss } from "../../../api/class";
-// import { useQuery } from "react-query";
+
 import TitleText from "../../../compnents/TitleText/TitleText";
 import { updateClassStatus } from "../../../api/select";
 import { useQuery } from "@tanstack/react-query";
 
 const MangeClass = () => {
-  // const [allClass, setAllClass] = useState([]);
 
-  // useEffect(() => {
-  //   getAllCalss().then((data) => {
-  //     setAllClass(data);
-  //   });
-  // }, []);
 
   const {data : allClass =[] , refetch } = useQuery({
     queryKey: ["classes"],
