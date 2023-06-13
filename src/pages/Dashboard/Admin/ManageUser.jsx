@@ -1,23 +1,9 @@
-
 import { useQuery } from "@tanstack/react-query";
-import {  makeAdmin, makeInstructor } from "../../../api/auth";
+import { makeAdmin, makeInstructor } from "../../../api/auth";
 import TitleText from "../../../compnents/TitleText/TitleText";
 import { toast } from "react-toastify";
-// import { AuthContext } from "../../../provider/AuthPorvider";
 
 const ManageUser = () => {
-  //  TODO Conver to
-
-  // const [allUser, setAllUser] = useState([]);
-
-  // useEffect(() => {
-  //   getAlluser().then((data) => {
-  //     setAllUser(data);
-  //   });
-  // }, []);
-
-  // console.log(allUser);
-
   const { data: allUser = [], refetch } = useQuery({
     queryKey: ["users"],
     queryFn: async () => {
@@ -33,7 +19,7 @@ const ManageUser = () => {
     makeInstructor(email).then((data) => {
       if (data.modifiedCount > 0) {
         // const data = "hello";
-        refetch()
+        refetch();
         toast.success("Done !");
       }
     });
@@ -42,8 +28,11 @@ const ManageUser = () => {
   const handlemakeAdmin = (email) => {
     console.log(email);
     makeAdmin(email).then((data) => {
-      console.log(data);
-      refetch()
+      if (data.modifiedCount > 0) {
+        // const data = "hello";
+        refetch();
+        toast.success("Done !");
+      }
     });
   };
 

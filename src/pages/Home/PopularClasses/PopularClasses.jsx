@@ -43,6 +43,8 @@ const PopularClasses = () => {
   return (
     <div className="my-20">
       <TitleText text="Our Popular Classes"></TitleText>
+      <div className="border-b-2 border-red-800 w-10 mx-auto"></div>
+      <p className="text-center mb-4 font-semibold">This is best class for you</p>
       <Container>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7 ">
           {allClases.map((cls) => (

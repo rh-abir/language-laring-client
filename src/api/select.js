@@ -37,15 +37,14 @@ export const updateClassStatus = async (id, status) => {
 };
 
 //delete select class by id TODO
-
-
-// export const deleteSelectClass = async (id) => {
-//   const res = await fetch(`${import.meta.env.VITE_API_URL}/select/${id}`, {
-//     method: "DELETE",
-//     headers: {
-//       "content-type": "application/json",
-//     }
-//   });
-//   const data = await res.json();
-//   return data;
-// };
+export const deleteSelectClass = async (id) => {
+  
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/select/${id}`, {
+    method: "DELETE",
+    headers: {
+      "content-type": "application/json",
+    },
+  });
+  const data = await res.json();
+  return data;
+};

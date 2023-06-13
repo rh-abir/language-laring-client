@@ -15,6 +15,8 @@ import AllClass from "../pages/AllClass/AllClass";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import SelecedPage from "../pages/Dashboard/Student/SeletedPage/SelecedPage";
 import EnrollPage from "../pages/Dashboard/Student/EnrollPage/EnrollPage";
+import PaymentSuccess from "../pages/PaymentSuccess/PaymentSuccess";
+import PaymentFaild from "../pages/PaymentFaild/PaymentFaild";
 
 const router = createBrowserRouter([
   {
@@ -35,6 +37,14 @@ const router = createBrowserRouter([
       {
         path: "/classes",
         element: <AllClass></AllClass>,
+      },
+      {
+        path: "/payment/success/:tranId",
+        element: <PaymentSuccess></PaymentSuccess>,
+      },
+      {
+        path: "/payment/fail/:tranId",
+        element: <PaymentFaild></PaymentFaild>,
       },
     ],
   },

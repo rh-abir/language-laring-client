@@ -1,24 +1,23 @@
-
-const ClassCard = ({cls, handleSelect}) => {
-
-
+const ClassCard = ({ cls, handleSelect }) => {
+  console.log(cls);
 
   return (
-    <div className="card card-compact w-96 bg-base-100 shadow-xl">
+    <div className="card card-compact w-full bg-base-100 shadow-xl">
       <figure>
-        <img 
-          src={cls.imageUrl}
-          alt="image"
-          className="w-full h-[250px]"
-        />
+        <img src={cls.imageUrl} alt="image" className="w-full h-[250px]" />
       </figure>
       <div className="card-body">
-        <h2 className="card-title">{cls?.title ? cls?.title : 'no title'}</h2>
-        <h2 className="card-title">Instro Name {cls.name}</h2>
-        <h2 className="card-title">$ {cls.price}</h2>
-        <p>{}</p>
+        <h2 className="card-title">{cls?.title ? cls?.title : "no title"}</h2>
+        <h2 className="">Instructor: {cls.name}</h2>
+        {/* <h2 className="card-title">$ {}</h2> */}
+        <p> $ {cls.price}</p>
         <div className="card-actions justify-end">
-          <button onClick={() => handleSelect(cls)} className="btn btn-outline btn-xs ">book</button>
+          <button
+            onClick={() => handleSelect(cls)}
+            className="btn btn-outline btn-xs "
+          >
+            book
+          </button>
         </div>
       </div>
     </div>
