@@ -18,17 +18,11 @@ const PopularClasses = () => {
 
   useEffect(() => {
     getPopularClass().then((data) => {
-      if(data.length > 6){
-          const sliceData = data.slice(0, 6)
-          setAllClasses(sliceData);
-      }
+      setAllClasses(data);
     });
   }, []);
 
-
-
-
-  console.log('all calss for HOme', allClases.length);
+  console.log("all calss for HOme", allClases.length);
 
   const handleSelect = (seleted) => {
     const selected = seleted;
