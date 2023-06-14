@@ -23,6 +23,7 @@ const SingleClassCard = ({ clas, handleSelect }) => {
         <h2 className="">Instructor: {clas.name}</h2>
         {/* <h2 className="card-title">$ {}</h2> */}
         <p> $ {clas.price}</p>
+        
         <div className="card-actions justify-end">
           {role?.role === "admin" || role?.role === "instructor" ? (
             <button className="btn btn-outline btn-xs " disabled>
