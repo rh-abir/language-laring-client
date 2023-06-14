@@ -49,3 +49,23 @@ export const deleteSelectClass = async (id) => {
   return data;
   
 };
+
+
+
+
+// update enroll status 
+
+export const updateClassEnroll = async (id, cardData) => {
+  const response = await fetch(
+    `${import.meta.env.VITE_API_URL}/class/enroll/${id}`,
+    {
+      method: "PUT",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ cardData }),
+    }
+  );
+  const data = await response.json();
+  return data;
+};

@@ -1,13 +1,16 @@
 import { useForm } from "react-hook-form";
+import { updateClassEnroll } from "../../api/select";
 
 const ModalPayment = ({ index, money, product }) => {
   const { register, handleSubmit } = useForm();
+
   const onSubmit = (data) => {
     data.mony = money;
     data.product = product;
     
+    const id = product._id;
 
-    console.log(data);
+    console.log(data, id);
     fetch(`${import.meta.env.VITE_API_URL}/order`, {
       method: "POST",
       headers: {
@@ -17,6 +20,12 @@ const ModalPayment = ({ index, money, product }) => {
     })
     .then(res => res.json())
     .then(result => {
+
+      updateClassEnroll(id, product)
+      .then(data => {
+        console.log(data)
+      })
+
       window.location.replace(result.url)
       console.log(result)
     })

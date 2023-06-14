@@ -4,6 +4,6 @@
 * firebase use for singup and signin entrigation
 * using JWT for veryfiy authorization 
 * Axios, react quary for data loading
-* SSl payment getway adding 
+* SSl payment getway using
 
 
