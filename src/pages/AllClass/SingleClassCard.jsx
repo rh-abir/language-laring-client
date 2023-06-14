@@ -13,8 +13,15 @@ const SingleClassCard = ({ clas, handleSelect }) => {
     });
   }, [user]);
 
+
+  
+  const enroll = clas.enroll;
+  const seats = clas.seats;
+  
+  console.log(enroll, seats)
+
   return (
-    <div className="card card-compact w-full bg-base-100 shadow-xl">
+    <div className={`card card-compact w-full ${enroll === seats ? "bg-red-500" : "bg-base-100"} shadow-xl`}>
       <figure>
         <img src={clas.imageUrl} alt="image" className="w-full h-[250px]" />
       </figure>

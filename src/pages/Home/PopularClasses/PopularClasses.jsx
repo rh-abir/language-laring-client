@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { getAllCalss } from "../../../api/class";
+import { getPopularClass } from "../../../api/class";
 import TitleText from "../../../compnents/TitleText/TitleText";
 import ClassCard from "./ClassCard";
 import Container from "../../../compnents/Container/Container";
@@ -17,12 +17,18 @@ const PopularClasses = () => {
   const [allClases, setAllClasses] = useState([]);
 
   useEffect(() => {
-    getAllCalss().then((data) => {
-      setAllClasses(data);
+    getPopularClass().then((data) => {
+      if(data.length > 6){
+          const sliceData = data.slice(0, 6)
+          setAllClasses(sliceData);
+      }
     });
   }, []);
 
-  // console.log('all calss for HOme', allClases);
+
+
+
+  console.log('all calss for HOme', allClases.length);
 
   const handleSelect = (seleted) => {
     const selected = seleted;

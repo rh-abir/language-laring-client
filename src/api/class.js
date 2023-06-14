@@ -26,6 +26,17 @@ export const getAllCalss = async () => {
   return data;
 };
 
+
+// get enroll calss 
+
+export const getPopularClass = async () => {
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/calss/popular`);
+  const data = await res.json();
+  return data;
+};
+
+
+
 // get approve Calss
 export const getAllApproveCalss = async () => {
   const res = await fetch(`${import.meta.env.VITE_API_URL}/approveclass`, {
