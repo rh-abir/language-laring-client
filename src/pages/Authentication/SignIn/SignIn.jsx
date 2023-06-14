@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../../provider/AuthPorvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 import { FaEye, FaEyeSlash, FaFacebookF, FaGoogle } from "react-icons/fa";
@@ -14,6 +14,8 @@ import { saveUser } from "../../../api/auth";
 
 const SignIn = () => {
   const { signIn, googleSignIn, gitHubSignIn } = useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const [error, setError] = useState("");
 
@@ -29,6 +31,8 @@ const SignIn = () => {
     signIn(email, pass)
       .then((result) => {
         console.log(result.user);
+
+        navigate("/");
         toast.success("LogIn successfully");
       })
       .catch((err) => {
@@ -45,8 +49,9 @@ const SignIn = () => {
     googleSignIn()
       .then((result) => {
         const loggedUsaer = result.user;
-        saveUser(result.user)
+        saveUser(result.user);
         console.log(loggedUsaer);
+        navigate("/");
         toast.success("LogIn successfully");
       })
       .catch((err) => {
@@ -62,8 +67,8 @@ const SignIn = () => {
         const loggedUsaer = result.user;
         console.log(loggedUsaer);
 
-        saveUser(result.user)
-
+        saveUser(result.user);
+        navigate("/");
         toast.success("LogIn successfully");
       })
       .catch((err) => {
@@ -145,13 +150,12 @@ const SignIn = () => {
           </div>
           <label className="label text-center">
             <p className="text-centers mx-auto ">
-              New Here ? 
-
+              New Here ?
               <Link
                 className="label-text-alt link link-hover text-[#251A59] underline font-bold text-base"
                 to="/signup"
               >
-                 Sign up 
+                Sign up
               </Link>
             </p>
           </label>

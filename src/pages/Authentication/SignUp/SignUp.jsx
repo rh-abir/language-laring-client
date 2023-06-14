@@ -1,6 +1,6 @@
 import { useContext, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../provider/AuthPorvider";
 import { toast } from "react-toastify";
 import { FaFacebookF, FaGoogle } from "react-icons/fa";
@@ -14,6 +14,8 @@ import { saveUser } from "../../../api/auth";
 const SignUp = () => {
   const { createUser, updateUSerProfile, googleSignIn, gitHubSignIn } =
     useContext(AuthContext);
+
+  const navigate = useNavigate();
 
   const [error, setError] = useState("");
 
@@ -70,6 +72,7 @@ const SignUp = () => {
             updateUSerProfile(name, imageUrl)
               .then(() => {
                 saveUser(result.user);
+                navigate("/");
                 toast.success("Done !");
               })
               .catch((err) => {
@@ -88,6 +91,7 @@ const SignUp = () => {
         const loggedUsaer = result.user;
         console.log(loggedUsaer);
         saveUser(result.user);
+        navigate("/");
         toast.success("LogIn successfully");
       })
       .catch((err) => {

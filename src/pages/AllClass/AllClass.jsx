@@ -5,55 +5,57 @@ import SingleClassCard from "./SingleClassCard";
 import { addSelectClass } from "../../api/select";
 import { AuthContext } from "../../provider/AuthPorvider";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 const AllClass = () => {
-
   const { user } = useContext(AuthContext);
 
-    const [allClass, setAllClass] = useState([])
-    useEffect(() => {
-      getAllApproveCalss()
-        .then(data => {
-            setAllClass(data)
-        })
-    }, [])
+  const naviget = useNavigate();
 
-    console.log(allClass)
+  const [allClass, setAllClass] = useState([]);
+  useEffect(() => {
+    getAllApproveCalss().then((data) => {
+      setAllClass(data);
+    });
+  }, []);
 
-  
-    const handleSelect = (seleted) => {
-      const selected = seleted;
-      const seletedClassInfo = {
-        student: {
-          name: user?.displayName,
-          email: user?.email,
-          image: user?.photoURL,
-        },
-        ...selected,
-      };
-      console.log("hello", seletedClassInfo);
-      addSelectClass(seletedClassInfo).then((data) => {
-        console.log(data);
-        if(data.insertedId){
-          toast.success('Selected your Class !')
-        }
-      });
+  console.log(allClass);
+
+  const handleSelect = (seleted) => {
+    const selected = seleted;
+    if (!user?.email) {
+      return naviget("/signin");
+    }
+
+    const seletedClassInfo = {
+      student: {
+        name: user?.displayName,
+        email: user?.email,
+        image: user?.photoURL,
+      },
+      ...selected,
     };
-
-
+    console.log("hello", seletedClassInfo);
+    addSelectClass(seletedClassInfo).then((data) => {
+      console.log(data);
+      if (data.insertedId) {
+        toast.success("Selected your Class !");
+      }
+    });
+  };
 
   return (
     <div className="max-w-7xl mx-auto my-20">
       <TitleText text={"All Class"}></TitleText>
 
       <div className="grid md:grid-cols-2 gap-6 lg:grid-cols-3">
-        {
-            allClass.map(clas => <SingleClassCard
-                key = {clas._id}
-                clas = {clas}
-                handleSelect = {handleSelect}
-            ></SingleClassCard>)
-        }
+        {allClass.map((clas) => (
+          <SingleClassCard
+            key={clas._id}
+            clas={clas}
+            handleSelect={handleSelect}
+          ></SingleClassCard>
+        ))}
       </div>
     </div>
   );

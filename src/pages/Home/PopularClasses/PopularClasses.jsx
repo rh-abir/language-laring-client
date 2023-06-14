@@ -6,10 +6,13 @@ import Container from "../../../compnents/Container/Container";
 import { addSelectClass } from "../../../api/select";
 import { AuthContext } from "../../../provider/AuthPorvider";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 // import ClassCard from "./ClassCard";
 
 const PopularClasses = () => {
   const { user } = useContext(AuthContext);
+
+  const naviget = useNavigate();
 
   const [allClases, setAllClasses] = useState([]);
 
@@ -23,6 +26,9 @@ const PopularClasses = () => {
 
   const handleSelect = (seleted) => {
     const selected = seleted;
+    if (!user?.email) {
+      return naviget("/signin");
+    }
     const seletedClassInfo = {
       student: {
         name: user?.displayName,
@@ -34,8 +40,8 @@ const PopularClasses = () => {
     console.log("hello", seletedClassInfo);
     addSelectClass(seletedClassInfo).then((data) => {
       console.log(data);
-      if(data.insertedId){
-        toast.success('Selected your Class !')
+      if (data.insertedId) {
+        toast.success("Selected your Class !");
       }
     });
   };
@@ -44,7 +50,9 @@ const PopularClasses = () => {
     <div className="my-20">
       <TitleText text="Our Popular Classes"></TitleText>
       <div className="border-b-2 border-red-800 w-10 mx-auto"></div>
-      <p className="text-center mb-4 font-semibold">This is best class for you</p>
+      <p className="text-center mb-4 font-semibold">
+        This is best class for you
+      </p>
       <Container>
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-7 ">
           {allClases.map((cls) => (
