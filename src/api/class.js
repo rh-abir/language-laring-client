@@ -17,16 +17,22 @@ export const addClass = async (classData) => {
 // get All classes
 
 export const getAllCalss = async () => {
-  const res = await fetch(`${import.meta.env.VITE_API_URL}/class`);
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/class`, {
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("access-token")}`,
+    },
+  });
   const data = await res.json();
   return data;
 };
 
-
-
-// get approve Calss 
+// get approve Calss
 export const getAllApproveCalss = async () => {
-  const res = await fetch(`${import.meta.env.VITE_API_URL}/approveclass`);
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/approveclass`, {
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("access-token")}`,
+    },
+  });
   const data = await res.json();
   return data;
 };
@@ -34,7 +40,11 @@ export const getAllApproveCalss = async () => {
 // get all calss by user
 
 export const getClassByUSer = async (email) => {
-  const res = await fetch(`${import.meta.env.VITE_API_URL}/class/${email}`);
+  const res = await fetch(`${import.meta.env.VITE_API_URL}/class/${email}`, {
+    headers: {
+      authorization: `Bearer ${localStorage.getItem("access-token")}`,
+    },
+  });
 
   const data = await res.json();
   return data;

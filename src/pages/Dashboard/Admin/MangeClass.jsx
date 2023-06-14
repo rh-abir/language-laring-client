@@ -1,15 +1,16 @@
-
 import TitleText from "../../../compnents/TitleText/TitleText";
 import { updateClassStatus } from "../../../api/select";
 import { useQuery } from "@tanstack/react-query";
 
 const MangeClass = () => {
-
-
-  const {data : allClass =[] , refetch } = useQuery({
+  const { data: allClass = [], refetch } = useQuery({
     queryKey: ["classes"],
     queryFn: async () => {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/class`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/class`, {
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("access-token")}`,
+        },
+      });
       const data = await res.json();
       return data;
     },
@@ -19,20 +20,17 @@ const MangeClass = () => {
     console.log(id);
     updateClassStatus(id, "approve").then((data) => {
       console.log(data);
-      refetch()
+      refetch();
     });
   };
-
 
   const handleDenyClass = (id) => {
     console.log(id);
     updateClassStatus(id, "deny").then((data) => {
       console.log(data);
-      refetch()
+      refetch();
     });
   };
-
-
 
   return (
     <div className="mx-20 mt-20 ">
@@ -57,11 +55,11 @@ const MangeClass = () => {
             </thead>
             <tbody>
               {/* row 1 */}
-              {allClass.map((clas, index) => (
+              {allClass?.map((clas, index) => (
                 <tr key={clas._id}>
                   <td>
                     {/* TODO : make number dinamic */}
-                    { index + 1}
+                    {index + 1}
                   </td>
                   <td>
                     <div className="flex items-center space-x-3">
@@ -94,7 +92,10 @@ const MangeClass = () => {
                     >
                       Approve
                     </button>
-                    <button onClick={() => handleDenyClass(clas._id)} className="btn btn-outline btn-secondary btn-xs">
+                    <button
+                      onClick={() => handleDenyClass(clas._id)}
+                      className="btn btn-outline btn-secondary btn-xs"
+                    >
                       Deny
                     </button>
                     <button className="btn btn-outline btn-accent btn-xs">

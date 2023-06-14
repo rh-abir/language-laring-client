@@ -42,7 +42,7 @@ const MyClasses = () => {
           <tbody>
             {/* row 1 */}
             {
-              classes.map(cls => <MyClassRow
+              classes?.map(cls => <MyClassRow
                 key={cls._id}
                 cls ={cls}
 

@@ -4,6 +4,7 @@ import { AuthContext } from "../../../../provider/AuthPorvider";
 import { useQuery } from "@tanstack/react-query";
 import { deleteSelectClass } from "../../../../api/select";
 import ModalPayment from "../../../../compnents/Mordel/ModalPayment";
+import { toast } from "react-toastify";
 
 const SelecedPage = () => {
   const { user } = useContext(AuthContext);
@@ -23,10 +24,15 @@ const SelecedPage = () => {
   // console.log(selectClass);
 
   const handlerDelte = (id) => {
+   
     console.log("delete handlaer", id);
 
     deleteSelectClass(id).then((data) => {
       console.log(data);
+      if(data.deletedCount){
+        toast.success('Delete successfull')
+        refetch()
+      }
     });
   };
 

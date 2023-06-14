@@ -73,7 +73,7 @@ const ManageUser = () => {
                 <td>{users.email}</td>
                 <td>
                   <button className="btn btn-xs cursor-default">
-                    {users.role}
+                    {users.role ? users.role : 'student' }
                   </button>
                 </td>
                 <td>

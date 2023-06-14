@@ -47,4 +47,5 @@ export const deleteSelectClass = async (id) => {
   });
   const data = await res.json();
   return data;
+  
 };
