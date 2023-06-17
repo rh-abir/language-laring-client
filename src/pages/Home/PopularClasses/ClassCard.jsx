@@ -18,7 +18,7 @@ const ClassCard = ({ cls, handleSelect }) => {
   const enroll = cls.enroll;
   const seats = cls.seats;
   
-  console.log(enroll, seats)
+  // console.log(enroll, seats)
 
 
 

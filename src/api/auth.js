@@ -58,6 +58,7 @@ export const makeAdmin  = (email) => {
 export const getRole =async (email) => {
   const res = await fetch(`${import.meta.env.VITE_API_URL}/users/${email}`);
   const data = await res.json()
+  // console.log(data)
   return data;
 }
 

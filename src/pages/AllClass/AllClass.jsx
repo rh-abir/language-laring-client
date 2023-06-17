@@ -22,7 +22,9 @@ const AllClass = () => {
   console.log(allClass);
 
   const handleSelect = (seleted) => {
-    const selected = seleted;
+
+    const {_id, ...rest}  = seleted;
+
     if (!user?.email) {
       return naviget("/signin");
     }
@@ -33,7 +35,7 @@ const AllClass = () => {
         email: user?.email,
         image: user?.photoURL,
       },
-      ...selected,
+      ...rest,
     };
     console.log("hello", seletedClassInfo);
     addSelectClass(seletedClassInfo).then((data) => {

@@ -22,7 +22,7 @@ const PopularClasses = () => {
     });
   }, []);
 
-  console.log("all calss for HOme", allClases.length);
+  // console.log("all calss for HOme", allClases.length);
 
   const handleSelect = (seleted) => {
     const selected = seleted;

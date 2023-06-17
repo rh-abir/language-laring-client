@@ -19,12 +19,12 @@ const Sidebar = () => {
   useEffect(() => {
     getRole(user?.email)
     .then(data => {
+      console.log(data)
       setRole(data)
-      // console.log('sidebar user',data)
     })
   }, [user])
 
-// console.log(role)
+console.log(role)
 
   return (
     <div className="flex">

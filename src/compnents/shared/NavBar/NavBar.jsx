@@ -38,7 +38,7 @@ const NavBar = () => {
       });
   };
 
-  console.log(user);
+  // console.log(user);
 
   return (
     <div className="bg-base-200 shadow-lg h-20">
