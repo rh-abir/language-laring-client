@@ -25,7 +25,9 @@ const PopularClasses = () => {
   // console.log("all calss for HOme", allClases.length);
 
   const handleSelect = (seleted) => {
-    const selected = seleted;
+    // const selected = seleted;
+
+    const {_id, ...rest}  = seleted;
     if (!user?.email) {
       return naviget("/signin");
     }
@@ -35,7 +37,7 @@ const PopularClasses = () => {
         email: user?.email,
         image: user?.photoURL,
       },
-      ...selected,
+      ...rest,
     };
     console.log("hello", seletedClassInfo);
     addSelectClass(seletedClassInfo).then((data) => {
